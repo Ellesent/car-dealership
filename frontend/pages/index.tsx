@@ -1,19 +1,11 @@
+import { FilterSection } from '../components/filter-section'
+import { Results } from '../components/results'
+
 export default function Home() {
   return (
-    <div>
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" />
-        </a>
-      </footer>
-      <a className="button is-primary">
-  Button
-</a>
+    <div className="is-flex is-align-items-flex-start">
+      <FilterSection />
+      <Results />
     </div>
   )
 }

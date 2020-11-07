@@ -1,8 +1,12 @@
 import type { AppProps } from 'next/app'
 import '../styles/styles.sass'
+import {NavBar} from '../components/navbar'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return <>
+  <NavBar/>
+  <Component {...pageProps} />
+  </>
 }
   
   // Only uncomment this method if you have blocking data requirements for
