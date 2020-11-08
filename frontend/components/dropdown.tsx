@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useState } from "react"
 
 export interface props {
     dropDownList: string[]
-    stateDispatcher?: Dispatch<SetStateAction<string>>
+    stateDispatcher: Dispatch<SetStateAction<string>>
 }
 
 // dropdown component
@@ -24,7 +24,7 @@ export const Dropdown = (props: props) => {
             <div className="dropdown-menu" id="dropdown-menu" role="menu">
                 <div className="dropdown-content">
                     {props.dropDownList.map((dropdownName: string, index: number) => (
-                        <a className={(index == indexActive ? "is-active" : "") + " dropdown-item"} key={dropdownName} onClick={(e) => {if(props.stateDispatcher){props.stateDispatcher(dropdownName);} setDropdownOpen(false); setIndexActive(index)}}>
+                        <a className={(index == indexActive ? "is-active" : "") + " dropdown-item"} key={dropdownName} onClick={(e) => {props.stateDispatcher(dropdownName); setDropdownOpen(false); setIndexActive(index)}}>
                              {dropdownName}
                         </a>
                     ))}
