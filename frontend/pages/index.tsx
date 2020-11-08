@@ -3,9 +3,9 @@ import { Results } from '../components/results'
 
 export default function Home() {
   return (
-    <div className="is-flex is-align-items-flex-start">
+    <main className="is-flex is-align-items-flex-start m-6">
       <FilterSection />
       <Results />
-    </div>
+    </main>
   )
 }
