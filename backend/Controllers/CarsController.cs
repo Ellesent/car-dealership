@@ -5,49 +5,33 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using backend.Models;
-using Newtonsoft.Json;
-using System.IO;
+using backend.Interfaces;
+
 
 namespace backend.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class CarsController : ControllerBase
     {
-        private List<CarModel> cars;
         private readonly ILogger<CarsController> _logger;
+        private readonly ICarsProvider _provider;
 
         /// <summary>
         /// Cars Controller Constructor
         /// </summary>
         /// <param name="logger"></param>
-        public CarsController(ILogger<CarsController> logger)
+        public CarsController(ICarsProvider provider, ILogger<CarsController> logger)
         {
             _logger = logger;
-            cars = ReadJson();
+            _provider = provider;
         }
 
-        /// <summary>
-        /// Read cars data from the json file - simulates database
-        /// </summary>
-        /// <returns>List of car data</returns>
-        private List<CarModel> ReadJson()
-        {
-            using (StreamReader r = new StreamReader("data.json"))
-            {
-                string json = r.ReadToEnd();
-                List<CarModel> cars = JsonConvert.DeserializeObject<List<CarModel>>(json);
-
-                Console.WriteLine(string.Join(',', cars));
-                return cars;
-            }
-        }
 
         [HttpGet]
-        public string GetMatchingCars(CarFilterModel filters)
+        public List<CarModel> GetMatchingCars([FromQuery] CarFilterModel filters)
         {
-
-            return "";
+            return _provider.GetCarsFromFilters(filters);
         }
 
         // [HttpGet]

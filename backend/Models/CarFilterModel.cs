@@ -5,12 +5,13 @@ namespace backend.Models
 {
     public class CarFilterModel {
         public string Color { get; set; }
-        public string Roof { get; set; }
-        public string Drive { get; set; }
-        public string Mileage { get; set; }
-        public string Window { get; set; }
-        public string Navigation { get; set; }
-        public string Seat { get; set; }
+        public bool? SunRoof { get; set; }
+        public bool? FourWheelDrive { get; set; }
+        public bool? LowMileage { get; set; }
+
+        public bool? PowerWindows{ get; set; }
+        public bool? Navigation { get; set; }
+        public bool? HeatedSeats { get; set; }
 
     }
 }
