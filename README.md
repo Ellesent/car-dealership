@@ -35,7 +35,7 @@ Please run the frontend using a command line, such as Powershell.
 
 1. navigate to the frontend folder
       - `cd .\frontend\`
-2. perform a nuget install to download and necessary npm packages
+2. perform an npm install to download and necessary npm packages
       - `npm i`
 3. run the application
       -`npm run dev`
