@@ -1,7 +1,25 @@
-import { useEffect, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { Dropdown } from "./dropdown"
 
-export const FilterSection = () => {
+export interface Car {
+  _id : string,
+  make : string,
+  year: number,
+  color: string,
+  price: number,
+  hasSunroof: boolean, 
+  isFourWheelDrive: boolean, 
+  hasLowMiles: boolean, 
+  hasPowerWindows: boolean, 
+  hasNavigation: boolean, 
+  hasHeatedSeats: boolean 
+}
+
+interface Props {
+  setCarList: Dispatch<SetStateAction<Car[]>>
+}
+
+export const FilterSection = (props: Props) => {
   // create the filter state objects - will be used to query data from the backend
   const [colorSelected, setColorSelected] = useState("All Colors");
   const [roofSelected, setRoofSelected] = useState("All Roof Types");
@@ -16,6 +34,10 @@ export const FilterSection = () => {
   // useEffect is only called when the variables passed in as the second argument are updated
   useEffect(() => {
     (async () => {
+      const response = await fetch("https://localhost:5001/api/cars");
+      const cars: Car[] = await response.json();
+
+      props.setCarList(cars);
       //const users = await axios.get("https://randomuser.me/api/?page=1&results=10&nat=us");
       //setUsers(users.data.results);
     })();

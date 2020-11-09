@@ -4,7 +4,7 @@ namespace backend.Models
         public string _id { get; set; }
         public string make { get; set; }
         public int year { get; set; }
-        public string Color { get; set; }
+        public string color { get; set; }
          public int price { get; set; }
          public bool hasSunroof { get; set; }
          public bool isFourWheelDrive { get; set; }

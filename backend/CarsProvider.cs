@@ -42,7 +42,7 @@ namespace backend {
             
             // create query for cars. A null filter means do not filter for that field (return all for that field)
             IQueryable<CarModel> query = cars.AsQueryable()
-            .WhereIf(!string.IsNullOrWhiteSpace(filters.Color), c => c.Color.ToUpper() == filters.Color.ToUpper())
+            .WhereIf(!string.IsNullOrWhiteSpace(filters.Color), c => c.color.ToUpper() == filters.Color.ToUpper())
             .WhereIf(filters.SunRoof != null, c => c.hasSunroof == filters.SunRoof)
             .WhereIf(filters.FourWheelDrive != null, c => c.isFourWheelDrive == filters.FourWheelDrive)
             .WhereIf(filters.LowMileage != null, c => c.hasLowMiles == filters.LowMileage)

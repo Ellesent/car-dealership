@@ -28,6 +28,7 @@ namespace backend
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<ICarsProvider, CarsProvider>();
+            services.AddCors();
             services.AddControllers();
         }
 
@@ -38,6 +39,10 @@ namespace backend
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // allow cross origin requests for the purpose of this project
+            app.UseCors(
+                options => options.WithOrigins("http://localhost:3000").AllowAnyMethod());
 
             app.UseHttpsRedirection();
 
