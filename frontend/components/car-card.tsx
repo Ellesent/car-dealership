@@ -15,15 +15,15 @@ export const CarCard = (props: Props) => {
             </div>
             <div className="card-content">
                 <div className={`${styles.cardContent} content is-flex is-flex-direction-column is-flex-wrap-wrap`}>
-                    <h1 className="has-text-primary"> {props.car.year} {props.car.make}</h1>
-                    <h5>Color: <strong>{props.car.color}</strong> </h5>
-                    <h5>Includes Sun Roof: <strong>{props.car.hasSunroof ? "Yes" : "No"}</strong></h5>
-                    <h5>Is Four Wheel Drive:<strong>{props.car.isFourWheelDrive ? "Yes" : "No"}</strong></h5>
-                    <h5>Has Low Mileage: <strong>{props.car.hasLowMiles ? "Yes" : "No"}</strong></h5>
-                    <h5>Window Type: <strong>{props.car.hasPowerWindows ? "Power" : "Manual"}</strong></h5>
-                    <h5>Includes Navigation: <strong>{props.car.hasNavigation ? "Yes" : "No"}</strong></h5>
-                    <h5>Seat Type: <strong>{props.car.hasHeatedSeats ? "Heated" : "Standard"}</strong></h5>
-                    <h5>Price: <strong>{'$' + props.car.price}</strong></h5>
+                    <h1 id="year-make" className="has-text-primary">{props.car.year} {props.car.make}</h1>
+                    <h5 id="color">Color: <strong>{props.car.color}</strong> </h5>
+                    <h5 id="roof">Includes Sun Roof: <strong>{props.car.hasSunroof ? "Yes" : "No"}</strong></h5>
+                    <h5 id="drive">Is Four Wheel Drive:<strong>{props.car.isFourWheelDrive ? "Yes" : "No"}</strong></h5>
+                    <h5 id="mileage">Has Low Mileage: <strong>{props.car.hasLowMiles ? "Yes" : "No"}</strong></h5>
+                    <h5 id="window">Window Type: <strong>{props.car.hasPowerWindows ? "Power" : "Manual"}</strong></h5>
+                    <h5 id="navigation">Includes Navigation: <strong>{props.car.hasNavigation ? "Yes" : "No"}</strong></h5>
+                    <h5 id="seat">Seat Type: <strong>{props.car.hasHeatedSeats ? "Heated" : "Standard"}</strong></h5>
+                    <h5 id="price">Price: <strong>{'$' + props.car.price}</strong></h5>
                     <br />
                 </div>
             </div>

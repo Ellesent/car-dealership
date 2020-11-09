@@ -1,6 +1,6 @@
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
-import { FilterSection } from "../components/filter-section";
+import { Car, FilterSection } from "../components/filter-section";
 
 let container: Element | null = null;
 
@@ -18,14 +18,41 @@ afterEach(() => {
         container.remove();
     }
     container = null;
+    jest.clearAllMocks();
 });
 
-it("Verify filter section renders correctly with given props", () => {
-    const mockDispatcher = jest.fn();
-    act(() => {
-        render(<FilterSection setCarList={mockDispatcher} />, container);
+it("Verify filter section renders correctly with given props", async () => {
+    const fakeCar: Car = {
+        _id: "59d2698c05889e0b23959106",
+        make: "Toyota",
+        year: 2012,
+        color: "Silver",
+        price: 18696,
+        hasSunroof: true,
+        isFourWheelDrive: true,
+        hasLowMiles: false,
+        hasPowerWindows: true,
+        hasNavigation: false,
+        hasHeatedSeats: false
+    };
 
-        // Once mockDispatcher has been run at least once we should expec it to be truthy
-        expect(mockDispatcher).toBeCalledTimes(0);
+    // mocking fetch to avoid warnings of unresolved promises and to test dispatcher being called
+    const mockFetchPromise = Promise.resolve({
+        json: () => Promise.resolve(fakeCar),
+    } as Response);
+
+    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
+
+    const mockDispatcher = jest.fn();
+
+    expect(mockDispatcher).toBeCalledTimes(0);
+
+    // Use the asynchronous version of act to apply resolved promises
+    await act(async () => {
+        render(<FilterSection setCarList={mockDispatcher} />, container);
     });
+
+    // expect the dispatcher to be called in useEffect once on render
+    expect(mockDispatcher).toBeCalledTimes(1);
+
 });
