@@ -7,6 +7,18 @@ The backend is written with C# .NET Core 3.1 and contains the API used for parsi
 
 The frontend is written with Next.js - React and Typescript. Bulma, a CSS framework, is used to style the page. 
 
+Selections:
+
+Domain: Car Dealership
+
+Interface: Web UI (SPA)
+
+Platform: .NET
+
+Backend: C#
+
+Frontend: React
+
 
 
 ## Running the Backend
