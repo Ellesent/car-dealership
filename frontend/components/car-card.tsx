@@ -9,7 +9,7 @@ interface Props {
 export const CarCard = (props: Props) => {
 
     return (
-        <div className={`${styles.card} card is-flex is-flex-direction-row`}>
+        <div className={`${styles.card} card is-flex is-flex-direction-row m-3`}>
             <div className={`${styles.cardImage} card-image`}>
                 <img className={`${styles.img}`} src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image" />
             </div>
@@ -23,6 +23,7 @@ export const CarCard = (props: Props) => {
                     <h5>Window Type: <strong>{props.car.hasPowerWindows ? "Power" : "Manual"}</strong></h5>
                     <h5>Includes Navigation: <strong>{props.car.hasNavigation ? "Yes" : "No"}</strong></h5>
                     <h5>Seat Type: <strong>{props.car.hasHeatedSeats ? "Heated" : "Standard"}</strong></h5>
+                    <h5>Price: <strong>{'$' + props.car.price}</strong></h5>
                     <br />
                 </div>
             </div>

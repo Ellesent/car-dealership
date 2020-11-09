@@ -105,7 +105,6 @@ export const FilterSection = (props: Props) => {
           params.append(key, (filters[key]));
         }
       }
-      console.log(params);
       const response = await fetch("https://localhost:5001/api/cars?" + params);
       const cars: Car[] = await response.json();
 

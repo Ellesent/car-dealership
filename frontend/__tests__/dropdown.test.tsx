@@ -1,7 +1,6 @@
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import { Dropdown } from "../components/dropdown";
-import Home from "../pages";
 
 let container: Element | null = null;
 
