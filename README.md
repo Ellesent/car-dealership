@@ -64,11 +64,11 @@ The frontend uses Jest as the testing framework.
       - `npm run test`
 
 
-### Closing Notes
-## Why This Architecture?
+## Closing Notes
+### Why This Architecture?
 The architecture I chose is a single-page web app that relies on a REST API for gathering the necessary data during the application's lifecycle. The reason for having two separate projects is to decouple responsibilities between them. This conforms to a more modern micro-service based architecture, and is more similar to the type of modern applications seen today. 
 
-## Additions That Would Improve the Project
+### Additions That Would Improve the Project
 - Add real relational database vs. parsing from a JSON file for data
 - Add more unit tests to frontend to simulate more user-interactions
 - Add more unit tests to backend to test helper methods such as the ReadJSON method.
