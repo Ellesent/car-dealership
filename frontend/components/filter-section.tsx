@@ -1,5 +1,7 @@
+import { Console, debug } from "console"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { Dropdown } from "./dropdown"
+import styles from '../styles/modules/filter-section.module.css'
 
 export interface Car {
   _id : string,
@@ -65,32 +67,55 @@ const seatTypes = {
   "Standard Seats" : false
 }
 
+interface CarFilters {
+  [index: string]: any,
+  color : string | null,
+  sunRoof : boolean | null,
+  fourWheelDrive : boolean | null
+  lowMileage : boolean | null
+  powerWindows: boolean | null
+  navigation : boolean | null
+  heatedSeats : boolean | null
+}
+
 export const FilterSection = (props: Props) => {
   // create the filter state objects - will be used to query data from the backend
-  const [colorSelected, setColorSelected] = useState("All Colors");
+  const [colorSelected, setColorSelected] = useState<string | null>(null);
   const [roofSelected, setRoofSelected] = useState<boolean | null>(null);
-  const [driveSelected, setDriveSelected] = useState("All Drive Types");
-  const [MileageSelected, setMileageSelected] = useState("All Mileage Types");
-  const [windowSelected, setWindowSelected] = useState("All Window Types");
-  const [navigationSelected, setNavigationSelected] = useState("All Navigation Types");
-  const [seatSelected, setSeatSelected] = useState("All Seat Types");
+  const [driveSelected, setDriveSelected] = useState<boolean | null>(null);
+  const [mileageSelected, setMileageSelected] = useState<boolean | null>(null);
+  const [windowSelected, setWindowSelected] = useState<boolean | null>(null);
+  const [navigationSelected, setNavigationSelected] = useState<boolean | null>(null);
+  const [seatSelected, setSeatSelected] = useState<boolean | null>(null);
 
 
   // used to monitor filter changes and return the matching cars - calls the backend to fetch data
   // useEffect is only called when the variables passed in as the second argument are updated
   useEffect(() => {
     (async () => {
-      const response = await fetch("https://localhost:5001/api/cars");
+      // create model
+      const filters : CarFilters = {color: colorSelected, sunRoof: roofSelected, fourWheelDrive: driveSelected, lowMileage: mileageSelected, powerWindows: windowSelected, navigation: navigationSelected, heatedSeats: seatSelected};
+
+      // create query string
+      const params = new URLSearchParams();
+
+      for (const key in filters) {
+        if (filters[key] != null) {
+          console.log(`${key} ${filters[key]}`)
+          params.append(key, (filters[key]));
+        }
+      }
+      console.log(params);
+      const response = await fetch("https://localhost:5001/api/cars?" + params);
       const cars: Car[] = await response.json();
 
       props.setCarList(cars);
-      //const users = await axios.get("https://randomuser.me/api/?page=1&results=10&nat=us");
-      //setUsers(users.data.results);
+     
     })();
-  }, []);
+  }, [colorSelected, roofSelected, driveSelected, mileageSelected, windowSelected, navigationSelected, seatSelected]);
 
   return (
-    <div className="is-flex is-flex-direction-column has-background-grey-lighter p-3 m-3">
+    <div className={`is-flex is-flex-direction-column has-background-grey-lighter is-justify-content-space-evenly p-3 m-3`}>
       <h1 className="title">Search Filters</h1>
       <Dropdown stateDispatcher={setColorSelected} dropDownObjectList={colors} />
       <Dropdown stateDispatcher={setRoofSelected} dropDownObjectList={roofTypes} />

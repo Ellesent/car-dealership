@@ -31,8 +31,6 @@ namespace backend {
             {
                 string json = r.ReadToEnd();
                 List<CarModel> cars = JsonConvert.DeserializeObject<List<CarModel>>(json);
-
-                Console.WriteLine(string.Join(',', cars));
                 return cars;
             }
         }
