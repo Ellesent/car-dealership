@@ -31,7 +31,22 @@ namespace backend.Controllers
         [HttpGet]
         public List<CarModel> GetMatchingCars([FromQuery] CarFilterModel filters)
         {
-            return _provider.GetCarsFromFilters(filters);
+            // TODO return 400 response
+            if (filters == null)
+            {
+                return new List<CarModel>();
+            }
+
+            try
+            {
+                return _provider.GetCarsFromFilters(filters);
+            }
+            catch (Exception e)
+            {
+                // TODO return 500 with error message
+                _logger.LogError("Error encountered when filtering for cars. Error is " + e.Message);
+                return new List<CarModel>();
+            }
         }
 
         // [HttpGet]
