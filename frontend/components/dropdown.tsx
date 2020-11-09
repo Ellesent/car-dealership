@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, useState } from "react"
 
 export interface props {
-    dropDownList: string[]
-    stateDispatcher: Dispatch<SetStateAction<string>>
+    stateDispatcher: Dispatch<SetStateAction<any>>
+    dropDownObjectList: Object // expecting an object where the keys are the visual values of the drop down items, and values are the values set using the dispatcher when that dropdown item is selected
 }
 
 // dropdown component
@@ -15,7 +15,7 @@ export const Dropdown = (props: props) => {
         <div className={(isDropdownOpen ? "is-active" : "") +" dropdown"} onClick={() => setDropdownOpen(!isDropdownOpen)}>
             <div className="dropdown-trigger">
                 <button className="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                    <span>{props.dropDownList[indexActive]}</span>
+                    <span>{Object.keys(props.dropDownObjectList)[indexActive]}</span>
                     <span className="icon is-small">
                         <i className="fas fa-angle-down" aria-hidden="true"></i>
                     </span>
@@ -23,8 +23,8 @@ export const Dropdown = (props: props) => {
             </div>
             <div className="dropdown-menu" id="dropdown-menu" role="menu">
                 <div className="dropdown-content">
-                    {props.dropDownList.map((dropdownName: string, index: number) => (
-                        <a className={(index == indexActive ? "is-active" : "") + " dropdown-item"} key={dropdownName} onClick={(e) => {props.stateDispatcher(dropdownName); setDropdownOpen(false); setIndexActive(index)}}>
+                    {Object.keys(props.dropDownObjectList).map((dropdownName: string, index: number) => (
+                        <a className={(index == indexActive ? "is-active" : "") + " dropdown-item"} key={dropdownName} onClick={(e) => {props.stateDispatcher(dropdownName in props.dropDownObjectList); setDropdownOpen(false); setIndexActive(index)}}>
                              {dropdownName}
                         </a>
                     ))}

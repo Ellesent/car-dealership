@@ -19,10 +19,56 @@ interface Props {
   setCarList: Dispatch<SetStateAction<Car[]>>
 }
 
+const roofTypes  = {
+  "All Roof Types" : null,
+  "No Sun Roof" : false,
+  "Has Sun Roof" : true
+}
+
+const colors = {
+  "All Colors" : null,
+  "Red" : "Red",
+  "White" : "White",
+  "Gray" : "Gray",
+  "Silver" : "Silver",
+  "Black": "Black"
+}
+
+
+const driveTypes = {
+  "All Drive Types" : null,
+  "Not 4 Wheel Drive" : false,
+  "4 Wheel Drive" : true
+}
+
+const mileageTypes = {
+  "All Mileage Types" : null,
+  "Low Mileage" : true,
+  "High Mileage" : false
+}
+
+const windowTypes = {
+  "All Window Types" : null,
+  "Power Windows" : true,
+  "Manual Windows" : false
+}
+
+const navigationTypes = {
+  "All Navigation Types" : null,
+  "Navigation Included" : true,
+  "Navigation Not Included" : false
+}
+
+const seatTypes = {
+  "All Seat Types" : null,
+  "Heated Seats" : true,
+  "Standard Seats" : false
+}
+
 export const FilterSection = (props: Props) => {
   // create the filter state objects - will be used to query data from the backend
   const [colorSelected, setColorSelected] = useState("All Colors");
-  const [roofSelected, setRoofSelected] = useState("All Roof Types");
+  const [roofSelected, setRoofSelected] = useState<boolean | null>(null);
   const [driveSelected, setDriveSelected] = useState("All Drive Types");
   const [MileageSelected, setMileageSelected] = useState("All Mileage Types");
   const [windowSelected, setWindowSelected] = useState("All Window Types");
@@ -44,16 +90,15 @@ export const FilterSection = (props: Props) => {
   }, []);
 
   return (
-    <div className="is-flex is-flex-direction-column has-background-grey-lighter p-3">
-      <h1 className="title">Section</h1>
-      <h2 className="subtitle">Filter Section</h2>
-      <Dropdown dropDownList={["All Colors", "Red", "White", "Gray", "Silver", "Black"]} stateDispatcher={setColorSelected} />
-      <Dropdown dropDownList={["All Roof Types", "No Sun Roof", "Has Sun Roof"]} stateDispatcher={setRoofSelected} />
-      <Dropdown dropDownList={["All Drive Types", "Not 4 Wheel Drive", "4 Wheel Drive"]} stateDispatcher={setDriveSelected} />
-      <Dropdown dropDownList={["All Mileage Types", "Low Mileage", "High Mileage"]} stateDispatcher={setMileageSelected} />
-      <Dropdown dropDownList={["All Window Types", "Power Windows", "Manual Windows"]} stateDispatcher={setWindowSelected} />
-      <Dropdown dropDownList={["All Navigation Types", "Navigation Included", "Navigation Not Included"]} stateDispatcher={setNavigationSelected} />
-      <Dropdown dropDownList={["All Seat Types", "Heated Seats", "Standard Seats"]} stateDispatcher={setSeatSelected} />
+    <div className="is-flex is-flex-direction-column has-background-grey-lighter p-3 m-3">
+      <h1 className="title">Search Filters</h1>
+      <Dropdown stateDispatcher={setColorSelected} dropDownObjectList={colors} />
+      <Dropdown stateDispatcher={setRoofSelected} dropDownObjectList={roofTypes} />
+      <Dropdown stateDispatcher={setDriveSelected} dropDownObjectList={driveTypes} />
+      <Dropdown stateDispatcher={setMileageSelected} dropDownObjectList={mileageTypes} />
+      <Dropdown stateDispatcher={setWindowSelected} dropDownObjectList={windowTypes} />
+      <Dropdown stateDispatcher={setNavigationSelected} dropDownObjectList={navigationTypes} />
+      <Dropdown stateDispatcher={setSeatSelected} dropDownObjectList={seatTypes} />
 
     </div>
   )
