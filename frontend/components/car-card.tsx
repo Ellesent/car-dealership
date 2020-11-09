@@ -8,6 +8,7 @@ interface Props {
 
 export const CarCard = (props: Props) => {
 
+    // Note: temporary image is used in card. In the future could be used to show an image of the car
     return (
         <div className={`${styles.card} card is-flex is-flex-direction-row m-3`}>
             <div className={`${styles.cardImage} card-image`}>

@@ -5,7 +5,7 @@ interface Props {
     carList: Car[]
 }
 
-
+// Component for the section of the page that will show car results based on search criteria
 export const Results = (props: Props) => {
     return (
         <section key="card-section-0" className="is-flex is-flex-direction-column m-3">
@@ -13,7 +13,7 @@ export const Results = (props: Props) => {
                 <h1 className="title">Search Results</h1>
                 <section key="card-section-1" className="car-card-section is-flex is-flex-direction-column">
                     {props.carList.map((car: Car) => (
-                        <CarCard key={car._id} car={car}/>
+                        <CarCard key={car._id} car={car} />
                     ))}
                 </section>
             </div>
